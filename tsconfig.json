@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx", // 指定将 JSX 编译成什么形式
+    
+    /* Language and Environment */
+    "target": "es5", // 编译后的 JavaScript 代码的目标版本
+    "lib": ["dom", "dom.iterable", "esnext"], // 编译器需要引入的库文件  
+    
+    /* Modules */
+    "module": "esnext", // 生成代码的模块化标准
+    "moduleResolution": "node", // 模块解析策略
+    "resolveJsonModule": true, // 允许导入扩展名为.json的模块
+    "paths": {}, // 配置路径别名
+    
+    /* JavaScript Support */
+    "allowJs": true, // 允许 ts 编译器编译 js 文件 
+    
+    /* Emit */
+    "noEmit": true, // 编译时不生成任何JS文件（只进行类型检查）
+    
+    /* Interop Constraints 互操作约束*/
+    "isolatedModules": true, // 没有import也能被安全的
+    "allowSyntheticDefaultImports": true, // 允许通过 import x from 'y' 即使模块没有显式指定 default 导出
+    "esModuleInterop": true, // 允许 esmoudle 和 commonjs 相互调用 
+    "forceConsistentCasingInFileNames": true, // 对文件名称强制区分大小写
+    
+    /* Type Checking */
+    "strict": true, // 开启严格模式 
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true, // 为 switch 语句启用错误报告
+    
+    /* Completeness */
+    "skipLibCheck": true, // 跳过类型声明文件的类型检查
+   },
+   "include": ["src"],
+   "exclude": [],
+}
