@@ -10,8 +10,10 @@
     "module": "esnext", // 生成代码的模块化标准
     "moduleResolution": "node", // 模块解析策略
     "resolveJsonModule": true, // 允许导入扩展名为.json的模块
-    "paths": {}, // 配置路径别名
-    
+    "baseUrl": ".",
+    "paths": { // 配置路径别名
+      "@/*": ["src/*"]
+    },
     /* JavaScript Support */
     "allowJs": true, // 允许 ts 编译器编译 js 文件 
     
@@ -32,6 +34,6 @@
     /* Completeness */
     "skipLibCheck": true, // 跳过类型声明文件的类型检查
    },
-   "include": ["src"],
+   "include": ["src","declarations.d.ts"],
    "exclude": [],
 }

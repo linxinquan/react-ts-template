@@ -1,0 +1,16 @@
+dist
+.eslintignore
+.prettierignore
+*.lock
+*.txt
+*.ico
+*.jpeg
+*.jpg
+.gitignore
+gitignore
+.husky
+.env
+.env.*
+**/public/*.css
+.stylelintignore
+tsconfig.json
