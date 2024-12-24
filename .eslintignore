@@ -1,8 +1,11 @@
+.eslintignore
 node_modules
 **/node_modules/**
 babel.config.js
 .eslintrc.js
+.commitlintrc.js
+.stylelintrc.js
+.prettierrc.js
 dist/**
 build/**
 .husky/**
-.eslintignore
