@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js",
-    "build": "cross-env NODE_ENV=production webpack -c build/webpack.prod.js",
+    "start": "cross-env NODE_ENV=development webpack-dev-server -c webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack -c webpack.config.js",
     "lint:prettier": "prettier -c \"**/*\"",
     "lint:style": "stylelint **/*.{css,scss,sass,less}",
     "lint:eslint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty .",
