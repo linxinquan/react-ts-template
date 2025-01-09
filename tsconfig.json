@@ -34,6 +34,6 @@
     /* Completeness */
     "skipLibCheck": true, // 跳过类型声明文件的类型检查
    },
-   "include": ["src","declarations.d.ts"],
-   "exclude": [],
+   "include": ["src","declarations.d.ts", "server.js"],
+   "exclude": ["**/*.glsl"],
 }
