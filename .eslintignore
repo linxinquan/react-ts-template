@@ -10,3 +10,4 @@ webpack.config.js
 dist/**
 build/**
 .husky/**
+server.js
