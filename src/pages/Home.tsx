@@ -9,6 +9,10 @@ const items = [
     key: '/graph',
     label: '图形学',
   },
+  {
+    key: '/tools',
+    label: '小工具',
+  },
 ];
 
 export default function Home() {

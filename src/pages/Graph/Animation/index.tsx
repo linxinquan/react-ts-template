@@ -1,16 +1,15 @@
-import { Button, message } from 'antd';
-import request from '@/utils/request';
+import ParticleViewer3D from '@/compos/ParticleViewer3D';
+import styles from './index.less';
 
 export default function Animation() {
-  const handleClick = () => {
-    request.get('/api/error').then((res) => {
-      message.config(res.data);
-    });
-  };
+  // const handleClick = () => {
+  //   request.get('/api/error').then((res) => {
+  //     message.config(res.data);
+  //   });
+  // };
   return (
-    <div>
-      Animation
-      <Button onClick={handleClick}>请求</Button>
+    <div className={styles.container}>
+      <ParticleViewer3D />
     </div>
   );
 }
