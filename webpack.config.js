@@ -17,6 +17,7 @@ module.exports = {
     publicPath: '/',
     filename: 'index.js',
   },
+  devtool: isDEV ? 'source-map' : '',
   devServer: {
     port: 3000,
     hot: true,
