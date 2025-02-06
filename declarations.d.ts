@@ -7,3 +7,8 @@ declare module '*.glsl' {
   const str: string;
   export default str;
 }
+
+declare module 'polyline-normals' {
+  const value: (p: number[][]) => [number[], number][]; // 或者根据需要定义更具体的类型
+  export default value;
+}

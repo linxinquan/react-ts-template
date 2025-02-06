@@ -1,6 +1,6 @@
 import { Result } from 'antd';
 
-export default function ErrorBoundary() {
+export default function PageNotFound() {
   return (
     <Result status="404" title="错误">
       <ul>

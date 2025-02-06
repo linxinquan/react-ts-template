@@ -21,10 +21,12 @@ function Viewer({ imgUrl, allPaths }: ViewerProps) {
   }, [allPaths]);
 
   useEffect(() => {
-    if (imgUrl) {
+    if (allPaths?.length && imgUrl) {
       creator.updateGeometry(imgUrl);
+    } else {
+      creator.createPoints(imgUrl);
     }
-  }, [imgUrl]);
+  }, [imgUrl, allPaths]);
 
   // useEffect(() => {
   //   creator.createPoints(imgUrl);

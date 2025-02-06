@@ -2,10 +2,10 @@ uniform vec3 uColor;
 varying float vDepth;
 
 vec3 getColor(float depth, vec3 color) {
-    float value = depth / -0.3 * 1.0;
-    float r = clamp(color.r - value * 5.0/255.0, 0.0, 1.0);
-    float g = clamp(color.g - value * 5.0/255.0, 0.0, 1.0);
-    float b = clamp(color.b - value * 5.0/255.0, 0.0, 1.0);
+    float value = -depth * 60.0;
+    float r = clamp(color.r - value/255.0, 0.0, 1.0);
+    float g = clamp(color.g - value/255.0, 0.0, 1.0);
+    float b = clamp(color.b - value/255.0, 0.0, 1.0);
     return vec3(r, g, b);
 }
 

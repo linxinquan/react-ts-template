@@ -1,5 +1,5 @@
 import { Layout, Menu } from 'antd';
-import { Outlet, useLocation, useNavigate } from 'react-router';
+import { Outlet, useNavigate } from 'react-router';
 import styles from './index.less';
 
 const { Header } = Layout;
@@ -11,17 +11,16 @@ const items = [
   },
   {
     key: '/tools',
-    label: '小工具',
+    label: '工具',
   },
 ];
 
-export default function Home() {
+export default function LayoutHome() {
   const navigate = useNavigate();
-  const location = useLocation();
 
   return (
-    <Layout className={styles.layout}>
-      <Header style={{ display: 'flex', alignItems: 'center' }}>
+    <Layout className={styles.home}>
+      <Header className={styles.header}>
         <div>logo</div>
         <Menu
           theme="dark"
@@ -31,7 +30,6 @@ export default function Home() {
             navigate(e.key);
           }}
           style={{ flex: 1, minWidth: 0 }}
-          activeKey={location.pathname}
         />
       </Header>
       <Outlet />

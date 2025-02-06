@@ -104,16 +104,19 @@ function getRandomPositions(count: number) {
   return positions;
 }
 
-function createMutableGeometry(geometry: BufferGeometry, pixels: PixelColor[]) {
-  const positions = new Float32Array(pixels.length * 3);
-  const initialPositions = getRandomPositions(pixels.length);
-  const velocities = new Float32Array(pixels.length * 3);
-  const lifetimes = new Float32Array(pixels.length);
-  for (let i = 0; i < pixels.length; i += 1) {
-    const { x, y } = pixels[i];
-    positions[i * 3] = x;
-    positions[i * 3 + 1] = y;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+function createMutableGeometry(geometry: BufferGeometry, pixels: PixelColor[], scale: number = 1) {
+  // 每隔4个点取一个点，减少数量
+  const sampledPixels = pixels.filter((_, index) => index % 4 === 0);
+  const positions = new Float32Array(sampledPixels.length * 3);
+  const initialPositions = getRandomPositions(sampledPixels.length);
+  const velocities = new Float32Array(sampledPixels.length * 3);
+  const lifetimes = new Float32Array(sampledPixels.length);
+
+  for (let i = 0; i < sampledPixels.length; i += 1) {
+    const { x, y } = sampledPixels[i];
+    positions[i * 3] = x * scale;
+    positions[i * 3 + 1] = y * scale;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 3;
 
     velocities[i * 3] = (Math.random() - 0.5) * 0.1;
     velocities[i * 3 + 1] = Math.random() * 0.2;

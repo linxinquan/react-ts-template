@@ -83,7 +83,6 @@ export default class ParticleCreator {
         this.imgPixels[url] = img;
       }),
     );
-    this.updateGeometry(paths[0]);
   }
 
   updateGeometry(url: string) {
@@ -91,7 +90,7 @@ export default class ParticleCreator {
     if (!img) {
       return;
     }
-    createMutableGeometry(this.point3d.geometry, img);
+    createMutableGeometry(this.point3d.geometry, img, 0.1);
     this.renderer.render();
     const tween = new Tween(this.material.uniforms.uProgress)
       .to({ value: 1 }, 2000)
@@ -99,7 +98,6 @@ export default class ParticleCreator {
       .onComplete(() => {
         if (this.material) {
           this.material.uniformsNeedUpdate = true;
-          this.material.uniforms.uProgress.value = 0;
           // this.point3d.geometry.attributes.
         }
       })
@@ -108,11 +106,11 @@ export default class ParticleCreator {
   }
 
   async createPoints(url: string = '/fish.svg') {
-    await this.recovery();
     this.time = 0;
+    await this.recovery();
     const img = await loadImage(url);
     // const size = img.width * img.height;
-    createMutableGeometry(this.point3d.geometry, img);
+    createMutableGeometry(this.point3d.geometry, img, 0.1);
     const material = this.createGradualMaterial();
     this.point3d.material = material;
     this.point3d.material.needsUpdate = true;
@@ -121,11 +119,9 @@ export default class ParticleCreator {
 
     const tween = new Tween(this.material.uniforms.uProgress)
       .to({ value: 1 }, 2000)
-      .delay(500)
+      .delay(100)
       .onComplete(() => {
-        if (this.material) {
-          this.material.uniformsNeedUpdate = true;
-        }
+        this.material.uniformsNeedUpdate = true;
       })
       .start();
     this.tweenGroup.add(tween);
@@ -135,7 +131,7 @@ export default class ParticleCreator {
     return new Promise<void>((resolve, reject) => {
       if (this.material) {
         const tween = new Tween(this.material.uniforms.uProgress)
-          .to({ value: 0 }, 1000)
+          .to({ value: 0 }, 300)
           .onComplete(() => {
             if (this.material) {
               this.material.uniformsNeedUpdate = true;
@@ -160,23 +156,23 @@ export default class ParticleCreator {
       }
     });
 
-    this.gui.add(this.guiParams, 'speed', 0, 1).onChange((value) => {
-      this.guiParams.speed = value;
-    });
-    this.gui.add(this.guiParams, 'lifeCycle', 0, 100).onChange((value) => {
-      this.guiParams.lifeCycle = value;
-      if (this.material) {
-        this.material.uniforms.lifeCycle.value = value;
-        this.renderer.render();
-      }
-    });
-    this.gui.add(this.guiParams, 'updateProbability', 0, 4).onChange((value) => {
-      this.guiParams.updateProbability = value;
-      if (this.material) {
-        this.material.uniforms.updateProbability.value = value;
-        this.renderer.render();
-      }
-    });
+    // this.gui.add(this.guiParams, 'speed', 0, 1).onChange((value) => {
+    //   this.guiParams.speed = value;
+    // });
+    // this.gui.add(this.guiParams, 'lifeCycle', 0, 100).onChange((value) => {
+    //   this.guiParams.lifeCycle = value;
+    //   if (this.material) {
+    //     this.material.uniforms.lifeCycle.value = value;
+    //     this.renderer.render();
+    //   }
+    // });
+    // this.gui.add(this.guiParams, 'updateProbability', 0, 4).onChange((value) => {
+    //   this.guiParams.updateProbability = value;
+    //   if (this.material) {
+    //     this.material.uniforms.updateProbability.value = value;
+    //     this.renderer.render();
+    //   }
+    // });
     this.gui.addColor(this.guiParams, 'color').onChange((value) => {
       this.guiParams.color = value;
       if (this.material) {
@@ -193,12 +189,12 @@ export default class ParticleCreator {
         pointSize: { value: this.guiParams.pointSize },
         lifeCycle: { value: this.guiParams.lifeCycle },
         updateProbability: { value: this.guiParams.updateProbability },
+        uProgress: { value: 0 },
       },
       vertexShader: particleVertex,
       fragmentShader: particleFragment,
       transparent: true,
       depthWrite: false,
-      // blending
     });
     return material;
   }
@@ -215,7 +211,6 @@ export default class ParticleCreator {
       fragmentShader: gradualFragment,
       transparent: true,
       depthWrite: false,
-      // blending
     });
     return material;
   }

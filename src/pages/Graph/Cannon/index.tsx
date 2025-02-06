@@ -1,12 +1,13 @@
 import { useEffect, useContext } from 'react';
 import { useCreation } from 'ahooks';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigation } from 'react-router';
 import { Object3D } from 'three';
 import { RendererContext, RendererViewerHOC } from '@/compos/RendererHOC';
 import CannonBuilder from './CannonBuilder';
 import { IModels } from '@/utils/Loader';
 
 function CannonViewer() {
+  const navigation = useNavigation();
   const renderer = useContext(RendererContext);
   const cannonBuilder = useCreation(() => new CannonBuilder(renderer), [renderer]);
   const data = useLoaderData<IModels>();
@@ -19,6 +20,10 @@ function CannonViewer() {
       cannonBuilder.dispose();
     };
   }, [cannonBuilder]);
+
+  if (navigation.state === 'loading') {
+    return <div>loading</div>;
+  }
 
   return (
     <div>
