@@ -3,12 +3,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Portfinder = require('portfinder');
 
 require('dotenv').config();
-
 const isDEV = process.env.NODE_ENV === 'development';
 
-module.exports = {
+const config = {
   mode: process.env.NODE_ENV,
   entry: path.join(__dirname, './src/index.tsx'), // 入口文件
   output: {
@@ -18,13 +18,34 @@ module.exports = {
     filename: 'index.js',
   },
   devtool: isDEV ? 'source-map' : '',
+  stats: {
+    assets: false,
+    modules: false,
+  },
   devServer: {
     port: 3000,
     hot: true,
     historyApiFallback: true,
+    open:true,
     proxy: {
       '/api': 'http://localhost:8080',
     },
+    // setupMiddlewares: (middlewares, devServer) => {
+    //   Portfinder.getPort((err, port) => {
+    //     if (err) {
+    //       console.error(err);
+    //       return;
+    //     }
+    //     devServer.listen(port, '0.0.0.0', () => {
+    //       console.log(`Server listening on port ${port}`);
+    //     });
+    //   });
+    //   return middlewares;
+    // },
+    // client: {},
+    // onAfterSetupMiddleware: (devServer) => {
+    //   devServer.app.use(noopServiceWorkerMiddleware(paths.publicUrlOrPath));
+    // },
   },
   module: {
     rules: [
@@ -97,3 +118,19 @@ module.exports = {
     }),
   ].filter(Boolean),
 };
+
+module.exports = config;
+// module.exports = new Promise((resolve, reject) => {
+//   if (!isDEV) {
+//     resolve(config);
+//   }
+//   Portfinder.basePort = config.devServer.port;
+//   Portfinder.getPort((err, port) => {
+//     if (err) {
+//       reject(err);
+//     }
+//     process.env.PORT = port;
+//     config.devServer.port = port;
+//     resolve(config);
+//   });
+// });

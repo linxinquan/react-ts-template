@@ -11,3 +11,4 @@ dist/**
 build/**
 .husky/**
 server.js
+start.js
